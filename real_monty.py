@@ -2,8 +2,6 @@
 Monty Hall Problem Simulator
 """
 
-#TODO do some profiling to see where this is slow
-#TODO use np.where() for new_doors
 
 import numpy as np
 
