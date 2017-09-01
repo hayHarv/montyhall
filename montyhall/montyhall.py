@@ -1,5 +1,12 @@
 """
+Author Hayden Harvey
+
 Monty Hall Problem Simulator
+
+I wrote this because the Monty Hall problem
+is really confusing and it seemed like good
+practice for working with numpy structures.
+
 """
 
 
@@ -52,23 +59,41 @@ class Game:
                 return self.result
 
 
-class N_trials:
-    def __init__(self, n, n_doors=3):
-        self.n = n
+class N_rounds:
+    """
+    class for simulating Monty Hall game
+
+    runs n_trials for each "switch" and "stay" player types
+
+
+    Parameters
+    ----------
+    n_rounds: number of rounds
+    n_doors: number of doors per round
+
+    Returns
+    ----------
+    results: dict of outcomes (wins and losses) for each player type
+    outcomes: dict of count of outcomes (wins) for each over n_rounds
+    outcome_proba: dict of outcome probabilities for each player type
+
+    """
+    def __init__(self, n_rounds, n_doors=3):
+        self.n_rounds = n_rounds
         self.results = {"switch": [], "stay": []}
         self.outcomes = {}
         self.outcome_proba = {}
         self.n_doors = n_doors
- 
-    def run_trials(self):
-        for player_type in ["stay", "switch"]:
-            for trial in range(self.n):
-                game = Game(player_type=player_type, n_doors=self.n_doors)
-                game.play()
-                self.results[player_type].append(game.result)
-            self.outcomes[player_type] = sum(self.results[player_type])
-            proba = self.outcomes[player_type]/self.n
-            self.outcome_proba[player_type] = proba
 
+        def run_trials(self):
+            for player_type in ["stay", "switch"]:
+                for trial in range(self.n_rounds):
+                    game = Game(player_type=player_type, n_doors=self.n_doors)
+                    game.play()
+                    self.results[player_type].append(game.result)
+                self.outcomes[player_type] = sum(self.results[player_type])
+                proba = self.outcomes[player_type]/self.n_rounds
+                self.outcome_proba[player_type] = proba
 
+        run_trials(self)
 
