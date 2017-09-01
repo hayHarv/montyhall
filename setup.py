@@ -6,4 +6,5 @@ setup(name = "montyhall",
         author="Hayden Harvey",
         license="MIT",
         packages=["montyhall"],
+        install_requires=['numpy'],
         zip_safe=False)
